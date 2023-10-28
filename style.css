@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Blinker:wght@600&display=swap');
 
 body{
-    background: #7289DA;
+    background: #BA8C63;
+    background-image: url("game_images/Wood.jpg");
     font-family: 'Blinker', sans-serif;
 }
 
@@ -25,7 +26,7 @@ a{
     height: 112px;
     flex-shrink: 0;
     border-radius: 5px;
-    background: #4E5D94;
+    background: #4E5D94; /* alt: #45739C*/
     /* existing styles... */
     margin-bottom: 2vh; /* add margin to bottom of each game div */
   
@@ -45,7 +46,7 @@ a{
   
   .gamedesc {
     flex-basis: 60%; /* takes up 60% of parent width */
-    background: #808080; /* grey, change as needed */
+    background: #5D4632; /* grey, change as needed */
     height: 100%; /* full height of parent */
 
     border-radius: 0 10% 10% 0;
@@ -84,7 +85,7 @@ a{
   .rectangle {
     flex: 1 1 calc((100% - 2 * 4% ) / 3); /* 100% minus twice the gap (4%) divided by 3 rectangles */
     height: 50px;
-    background: #4E5D94;
+    background: #5D4632;
     margin: 0 1%; /* This is the gap size */
 
 
@@ -97,7 +98,7 @@ a{
     color: #f4f4f4; /* color of the text */
     font-size: 1.35em; /* size of the text */
 
-    border: 1px solid #f4f4f4;
+    border: 5px solid #95704F;
     border-radius: 10% 10% 10% 10%;
 
   }
@@ -110,7 +111,7 @@ a{
 /* CSS States */
 
   .active_categorie{
-    background: #E8FFFF;
+    background: #C8A382;
   }
   
   .hid{
