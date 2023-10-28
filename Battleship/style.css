@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css2?family=Blinker&display=swap');
+
+
+.board {
+    display: none;
+    width: 960px;  /* width to fit 10 cells, considering 1px border */
+    height: 960px; /* height to fit 10 cells, considering 1px border */
+    clear: both;
+  }
+  
+  .board .cell {
+    box-sizing: border-box;
+    width: 95px;
+    height: 95px;
+    border: 1px dashed #000;
+    float: left;
+  }
+  
+
+  .ship {
+    background-color: gray;
+  }
+  
+
+/* Think about removing double coloring, its already colored in the game-loop */
+  .hit {
+    background-color: red;
+  }
+  
+  .miss {
+    background-color: blue;
+  }
+  
+
+  
+
+/* My CSS */
+
+
+button{
+  padding: 12vw;
+  font-size: 8vw;
+
+  border: 6px outset #007bff;
+  border-radius: 10% / 10%;
+  margin: 5%;
+
+  background-color: #53B4DE;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  color: white;
+  border: 6px outset #53B4DE;
+  border-radius: 10% / 10%;
+
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+/* Responsiveness */
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f4f4f4;
+  font-family: 'Blinker', sans-serif;
+}
+
+/* Startpage from here */
+
+#back-btn{
+  position: absolute;
+  top: 20px; /* Adjust as needed */
+  left: 20px; /* Adjust as needed */
+  width: 2vw;
+  height: 2vh;
+  font-size: 36px;
+  }
+
+
+h2{
+  text-align: center;
+  font-size: 12vw;
+}
+
+#startpage{
+  display: flex;
+  flex-direction: column;
+
+}
+
+
+/* Animation */
+
+.battleship {
+  display: inline-block;
+  animation: shakeAndSink 5s infinite; /* Updated duration to 13 seconds */
+  transform-origin: center bottom;
+  z-index: -1;
+}
+
+@keyframes shakeAndSink {
+  /* Shake */
+  0%, 15.38% { /* 15.38% is 2s/13s */
+    transform: translateX(0) rotate(0);
+  }
+  3.85%, 11.54% {
+    transform: translateX(-10px) rotate(-3deg);
+  }
+  7.69% {
+    transform: translateX(10px) rotate(3deg);
+  }
+  
+  /* Sink */
+  15.39% {
+    transform: translateY(0) rotate(0);
+    opacity: 1;
+  }
+  30.77% {
+    transform: translateY(15%);
+    opacity: 0.9;
+  }
+  46.15% {
+    transform: translateY(30%);
+    opacity: 0.8;
+  }
+  61.54% {
+    transform: translateY(50%);
+    opacity: 0.7;
+  }
+  76.92% {
+    transform: translateY(75%);
+    opacity: 0.6;
+  }
+  92.3%, 100% { /* Ensure the ship remains in the final sinking state for 3 seconds (approximately) */
+    transform: translateY(100%);
+    opacity: 0.5;
+  }
+}
+
+

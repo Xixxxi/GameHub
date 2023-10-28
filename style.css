@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Blinker:wght@600&display=swap');
+
+body{
+    background: #7289DA;
+    font-family: 'Blinker', sans-serif;
+}
+
+a{
+  text-decoration: none;
+}
+
+/* Game Elements */
+
+.game-container {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    height: 80vh; /* make container full height */
+  }
+  
+  .game {
+    display: flex;
+    width: 271px;
+    height: 112px;
+    flex-shrink: 0;
+    border-radius: 5px;
+    background: #4E5D94;
+    /* existing styles... */
+    margin-bottom: 2vh; /* add margin to bottom of each game div */
+  
+    border-radius: 10% 10% 10% 10%;
+    color: #f4f4f4;
+    
+    
+  }
+  
+  .gamepic {
+    flex-basis: 40%; /* takes up 40% of parent width */
+    background: #D3D3D3; /* light grey, change as needed */
+    height: 100%; /* full height of parent */
+
+    border-radius: 10% 0 0 10%;
+  }
+  
+  .gamedesc {
+    flex-basis: 60%; /* takes up 60% of parent width */
+    background: #808080; /* grey, change as needed */
+    height: 100%; /* full height of parent */
+
+    border-radius: 0 10% 10% 0;
+
+
+  }
+
+  .gamedesc h2,p{
+    margin-left: 8%;
+  }
+
+  .game img {
+    height: 112px;
+
+    border-radius: 10% 0 0 10%;
+
+
+  }
+
+  /* Rectangles */
+
+  .rectangle-container {
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    bottom: 0;
+    left: 1%;
+    right: 1%;
+    width: auto;
+
+    padding: 0 0 1% 0;
+    margin: 0 0 8% 0;
+
+  }
+  
+  .rectangle {
+    flex: 1 1 calc((100% - 2 * 4% ) / 3); /* 100% minus twice the gap (4%) divided by 3 rectangles */
+    height: 50px;
+    background: #4E5D94;
+    margin: 0 1%; /* This is the gap size */
+
+
+    
+    /* Center the text and make it visible */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    color: #f4f4f4; /* color of the text */
+    font-size: 1.35em; /* size of the text */
+
+    border: 1px solid #f4f4f4;
+    border-radius: 10% 10% 10% 10%;
+
+  }
+
+  .rectangle p {
+    -webkit-text-stroke: 0.5px black;
+  }
+
+
+/* CSS States */
+
+  .active_categorie{
+    background: #E8FFFF;
+  }
+  
+  .hid{
+    display: none;
+  }

@@ -1,0 +1,82 @@
+*, *::before, *::after{
+    box-sizing: border-box;
+    font-family: Gotham-Rounded;
+      font-size: 20px;
+  }
+  
+  body{
+    padding: 20px;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(to top, hsl(90,70%,50%), hsl(70,100%,80%))
+  }
+  
+  a{
+    text-decoration: none;
+  }
+
+  /* Background Animation starts here !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+  
+  body {
+      /* background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab); */
+    background: linear-gradient(-45deg, #4A3828, #BA8C63, #70543B, #4A3828); 
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+    height: 100vh;
+  }
+  @keyframes gradient {
+      0% {
+          background-position: 0% 50%;
+      }
+      50% {
+          background-position: 100% 50%;
+      }
+      100% {
+          background-position: 0% 50%;
+      }
+  }
+   /* Background animation ends here !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+  
+  
+  .container{
+    width: 800px;
+    max-width: 100%;
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px 2px;
+  }
+  
+  .btn-grid{
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    gap: 10px;
+    margin-top: 20px;
+  }
+  .btn{
+    background-color: hsl(200, 100%, 50%);
+    border: 2px solid hsl(200, 100%, 30%);
+    border-radius: 5px;
+    padding: 5px 10px;
+    color: white;
+    outline: none;
+  }
+  .btn:hover{
+    border-color: black;
+    cursor: pointer;
+    opacity: 0.8;
+  }
+
+
+
+  /* My Additions */
+
+  #back-btn{
+  position: absolute;
+  top: 20px; /* Adjust as needed */
+  left: 20px; /* Adjust as needed */
+  }
