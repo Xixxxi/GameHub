@@ -4,6 +4,9 @@ body{
     background: #BA8C63;
     background-image: url("game_images/Wood.jpg");
     font-family: 'Blinker', sans-serif;
+
+    margin-top: 6vh;
+    margin-bottom: 12vh;
 }
 
 a{
@@ -28,8 +31,9 @@ a{
     border-radius: 5px;
     background: #4E5D94; /* alt: #45739C*/
     /* existing styles... */
-    margin-bottom: 2vh; /* add margin to bottom of each game div */
+    margin-top: 2vh; /* add margin to bottom of each game div */
   
+    border: 3px solid #95704F;
     border-radius: 10% 10% 10% 10%;
     color: #f4f4f4;
     
@@ -98,7 +102,7 @@ a{
     color: #f4f4f4; /* color of the text */
     font-size: 1.35em; /* size of the text */
 
-    border: 5px solid #95704F;
+    border: 3px solid #95704F;
     border-radius: 10% 10% 10% 10%;
 
   }

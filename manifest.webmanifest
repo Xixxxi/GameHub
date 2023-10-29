@@ -4,9 +4,9 @@
     "display": "fullscreen",
     "scope": "/",
     "start_url": "/index.html",
-    "name": "GameHub",
-    "short_name": "GameHub",
     "description": "A collection of selfmade Games :)",
+    "short_name": "GameHub",
+    "name": "GameHub",
     "icons": [
         {
             "src": "/icon-192x192.png",

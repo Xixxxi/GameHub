@@ -36,8 +36,11 @@
 
 /* My CSS */
 
+a{
+  text-decoration: none;
+}
 
-button{
+#startButton{
   padding: 12vw;
   font-size: 8vw;
 
@@ -70,14 +73,15 @@ body {
   font-family: 'Blinker', sans-serif;
 }
 
+
 /* Startpage from here */
 
 #back-btn{
   position: absolute;
-  top: 20px; /* Adjust as needed */
-  left: 20px; /* Adjust as needed */
-  width: 2vw;
-  height: 2vh;
+  top: 30px; /* Adjust as needed */
+  left: 30px; /* Adjust as needed */
+  width: 18vw;
+  height: 5vh;
   font-size: 36px;
   }
 
