@@ -1,0 +1,106 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #000;
+}
+
+#hockeyField {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    box-sizing: border-box;
+    background: #111;
+    border: 2px solid #0f0;
+    box-shadow: 0 0 15px #0f0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.goal {
+    position: relative;
+    width: 100%;
+    height: 10vh;
+    max-height: 100px;
+    background: rgba(255, 255, 255, 0.2);
+    border-top: 2px solid #f00;
+    border-bottom: 2px solid #f00;
+}
+.goalkeeper {
+    position: absolute;
+    width: 20%; /* Goalkeeper width as a percentage of the goal width */
+    height: 100%; /* Goalkeeper height to fill the goal area */
+    background: rgba(0, 0, 255, 0.5); /* Semi-transparent blue color */
+    border-radius: 10px; /* Rounded corners for the goalkeeper */
+    top: 0;
+    left: 40%; /* Center the goalkeeper within the goal area */
+    z-index: 5; /* Ensure it's above the goal but below the puck */
+}
+
+
+.middle-line {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #0f0;
+    transform: translateY(-50%);
+}
+
+.puck {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 30px; /* Diameter of the puck */
+    height: 30px; /* Diameter of the puck */
+    background: #fff;
+    border: 2px solid #333;
+    border-radius: 50%; /* Makes the div circular */
+    transform: translate(-50%, -50%);
+}
+.puck.shadow {
+    background: rgba(255, 255, 255, 0.5); /* Lighter color for the shadow puck */
+    position: fixed; /* Use fixed to allow free movement across the screen */
+    display: none; /* Start with the shadow puck not displayed */
+    z-index: 10; /* Ensure it's above other elements */
+}
+
+/* Add-Ons */
+
+.score {
+    position: absolute;
+    top: 10%; /* Adjust this value as needed */
+    width: 100%;
+    text-align: center;
+    font-size: 3em; /* Large text size for visibility */
+    color: rgb(47, 255, 47); /* Glowing text color */
+    pointer-events: none; /* Ensures that touch events pass through the score display */
+    font-size: 120px;
+    opacity: 0.2;
+}
+
+#scoreBottom {
+    top: auto;
+    bottom: 10%; /* Position the bottom player's score at the bottom of the field */
+}
+
+  /* Back-Button Style */
+
+#back-btn{
+    position: absolute;
+    top: 100px; /* Adjust as needed */
+    left: 10px; /* Adjust as needed */
+    z-index: 100;
+    background-color: red;
+    }
+
+a{
+    text-decoration: none;
+}

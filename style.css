@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Blinker:wght@600&display=swap');
 
 body{
-    background: #BA8C63;
-    background-image: url("game_images/Wood.jpg");
+    /* background: #BA8C63; (alte bevorzugte Holz-Farbe) */
+    /* background: #F9E2C4; */
+    background-image: url("public/game_images/Wood.jpg");
     font-family: 'Blinker', sans-serif;
 
     margin-top: 6vh;
@@ -33,7 +34,7 @@ a{
     /* existing styles... */
     margin-top: 2vh; /* add margin to bottom of each game div */
   
-    border: 3px solid #95704F;
+    border: 2px solid #95704F;
     border-radius: 10% 10% 10% 10%;
     color: #f4f4f4;
     
@@ -46,6 +47,10 @@ a{
     height: 100%; /* full height of parent */
 
     border-radius: 10% 0 0 10%;
+
+
+   max-width: 112px; /* custom max-image size for glow hockey game */
+
   }
   
   .gamedesc {
@@ -64,7 +69,7 @@ a{
 
   .game img {
     height: 112px;
-
+    
     border-radius: 10% 0 0 10%;
 
 
@@ -83,7 +88,7 @@ a{
 
     padding: 0 0 1% 0;
     margin: 0 0 8% 0;
-
+    font-size: 18px;
   }
   
   .rectangle {
@@ -102,7 +107,7 @@ a{
     color: #f4f4f4; /* color of the text */
     font-size: 1.35em; /* size of the text */
 
-    border: 3px solid #95704F;
+    border: 2px solid #95704F;
     border-radius: 10% 10% 10% 10%;
 
   }
@@ -115,7 +120,8 @@ a{
 /* CSS States */
 
   .active_categorie{
-    background: #C8A382;
+    /* background: #C8A382; */
+    background: #BA8C63;
   }
   
   .hid{
