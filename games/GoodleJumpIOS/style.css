@@ -1,0 +1,65 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #c3d2f6;
+    background-image: url("../GoodleJumpIOS/background.png");
+  }
+  
+  #gameCanvas {
+    border: 1px solid black;
+  }
+  
+
+  /* StartButton */
+  #startButton {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 100px 200px;
+    font-size: 120px;
+    cursor: pointer;
+    border: 20px outset rgba(0, 0, 255, .2);
+    border-radius: 50%;
+    box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);
+  }
+  
+
+  /* GameOver Screen */
+  #gameOverScreen {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-size: 120px;
+  }
+  
+  #reloadButton {
+    padding: 100px 200px;
+    font-size: 100px;
+    cursor: pointer;
+
+    border: 20px outset rgba(0, 0, 255, .2);
+    border-radius: 50%;
+    box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);
+  }
+  
+  
+/* Back-Button Style */
+
+a{
+  text-decoration: none;
+  padding: 20px;
+}
+
+#back-btn{
+position: absolute;
+top: 30px; /* Adjust as needed */
+left: 30px; /* Adjust as needed */
+font-size: 46px;
+}

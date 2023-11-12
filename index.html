@@ -5,17 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GameHub</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styleAddOns.css">
+
     <script src="script.js"></script>
 
     <link rel="manifest" href="manifest.webmanifest">
 
 </head>
 <body>
+
+
+  <label class="theme" onclick="ChangeVersion()">
+    <input class="input" checked="checked" type="checkbox">
+
+    <!-- Apple Logo -->
+    <img src="public/svgs/apple.svg" alt="AppleLogo" id="appleLogo" class="logo">
+    <!-- Android Logo -->
+    <img src="public/svgs/android.svg" alt="AndroidLogo" id="androidLogo" class="logo" style="display: none;">
+</label>
+
+
   <div class="game-container">
 
 <!-- Singleplayer Games start here !!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 
-<a href="FantasyAD/index.html">
+<a href="games/FantasyAD/index.html">
   <div class="game Singleplayer hid">
     <div class="gamepic">
       <img src="public/game_images\sword.png" alt="Fantasy Adventure">
@@ -27,17 +41,23 @@
   </div>
   </a>
 
-  <a href="GoodleJump/index.html">
+  
+  <div id="multiversiongame">
+  <a href="games/GoodleJumpIOS/index.html">
     <div class="game Singleplayer hid">
       <div class="gamepic">
         <img src="public/game_images\GoodleJump.png" alt="Goodle Jump">
       </div>
       <div class="gamedesc">
           <h2>Goodle Jump</h2>
-          <p>Keep on jumping</p>
+          <p>Iphone Version 
+            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512">! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc.<style>svg{fill:#ffffff}</style><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+        </p>
       </div>
     </div>
     </a>
+    </div>
+    
 
 <!-- Singleplayer Games end here !!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 
@@ -46,7 +66,7 @@
 
   
 
-      <a href="TicTacToe/index.html">
+      <a href="games/TicTacToe/index.html">
       <div class="game OneVsOne hid">
         <div class="gamepic">
           <img src="public/game_images\TicTacToe2.png" alt="TicTacToe">
@@ -58,7 +78,7 @@
       </div>
       </a>
 
-      <a href="Connect4/index.html">
+      <a href="games/Connect4/index.html">
       <div class="game OneVsOne hid">
         <div class="gamepic">
           <img src="public/game_images/connect4new.png" alt="Connect 4">
@@ -70,7 +90,7 @@
       </div>
       </a>
 
-      <a href="Battleship/index.html">
+      <a href="games/Battleship/index.html">
         <div class="game OneVsOne hid">
           <div class="gamepic">
             <img src="public/game_images/battleship2.png" alt="Battleships">
@@ -82,7 +102,7 @@
         </div>
         </a>
 
-        <a href="GlowHockey/index.html">
+        <a href="games/GlowHockey/index.html">
           <div class="game OneVsOne hid">
             <div class="gamepic">
               <img src="public/game_images/IconGlowHockey2.png" alt="Glow Hockey">
@@ -101,7 +121,7 @@
 
 <!-- 2+ Players Games start here !!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 
-      <a href="Guess/index.html">
+      <a href="games/Guess/index.html">
     <div class="game twoPlayers hid">
       <div class="gamepic">
         <img src="public/game_images/explain1.png" alt="Guess">
@@ -114,19 +134,19 @@
     </a>
 
 
-<a href="Memory/index.html">
+<a href="games/Memory/index.html">
   <div class="game twoPlayers hid">
     <div class="gamepic">
       <img src="public/game_images/memory2.png" alt="Memory">
     </div>
     <div class="gamedesc">
         <h2>Memory</h2>
-        <p>Find a pair to score</p>
+        <p>Find pairs to win</p>
     </div>
   </div>
 </a>
 
-<a href="Circa/index.html">
+<a href="games/Circa/index.html">
   <div class="game twoPlayers hid">
     <div class="gamepic">
       <img src="public/game_images/Circa2.png" alt="Circa">

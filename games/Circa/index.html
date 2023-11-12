@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Circa</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+</head>
+<body>
+
+    <button id="back-btn">
+        <a href="../../index.html">Go Back</a>
+      </button>
+
+    <div id="playerRegistration">
+        <h2>Willkommen bei Circa</h2>
+
+        <input type="number" id="playerCount" placeholder="Anzahl der Spieler">
+        <button onclick="registerPlayers()">Spieler registrieren</button>
+        <!-- Rundenlänge -->
+        <label for="roundLength">Rundenlänge (in Sekunden):</label>
+        <input type="number" id="roundLength" min="1" placeholder="Rundenlänge">   
+    </div>
+
+<div id="playerNames" style="display: none;"></div>
+
+
+    <div id="categorySelection" style="display: none;">
+        <p>Bitte wählen Sie mindestens eine Kategorie aus:</p>
+        <input type="checkbox" id="allgemeines">Allgemeines
+        <br>
+        <input type="checkbox" id="mathematik">Mathematik
+        <br>
+        <input type="checkbox" id="geographie">Geographie
+        <br>
+        <input type="checkbox" id="natur">Natur
+        <br>
+        <input type="checkbox" id="wissenschaft">Wissenschaft
+        <br>
+
+        <button onclick="startQuiz()">Start Quiz</button>
+    </div>
+
+
+    <div id="question" style="display: none;">
+        <p id="currentPlayer"></p>
+        <p id="questionText"></p>
+        <input type="number" id="answer">
+        <br>
+        <button onclick="submitAnswer()">Antwort absenden</button>
+        <br>
+    <div id="timer"></div> <!-- Neues div für den Timer -->
+
+    </div>
+    <div id="results" style="display: none;"></div>
+
+    
+
+    
+
+    <script src="script.js"></script>
+</body>
+</html>

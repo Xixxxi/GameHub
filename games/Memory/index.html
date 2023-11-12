@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <title>Memory Game</title>
+  <link rel="stylesheet" href="styles.css">
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <button id="back-btn">
+    <a href="../../index.html">Go Back</a>
+  </button>
+
+<div id="start-form">
+  <br>
+    <h2>Welcome to Memory!</h2>
+    <br>
+    <p>Please select the number of players:</p>
+    <br>
+    <div>
+        <input type="radio" id="num-players-1" name="num-players" value="1">
+        <label for="num-players-1">1 Player</label>
+    
+        <input type="radio" id="num-players-2" name="num-players" value="2">
+        <label for="num-players-2">2 Players</label>
+    
+        <input type="radio" id="num-players-3" name="num-players" value="3">
+        <label for="num-players-3">3 Players</label>
+      
+        <input type="radio" id="num-players-4" name="num-players" value="4">
+        <label for="num-players-4">4 Players</label>
+    </div>
+    <br>
+
+    <div id="player-name-fields">
+        <!-- Player name fields will be added here by the script -->
+    </div>
+<br>
+
+  <div id="difficulty-selection">
+      <input type="radio" id="normal" name="difficulty" value="normal" checked>
+      <label for="normal">Normal</label><br>
+   
+      <input type="radio" id="hard" name="difficulty" value="hard">
+      <label for="hard">Schwer</label><br>
+  </div>
+  
+    <button id="start-button">Start Game</button>
+    <br>
+</div>
+
+<div id="scoreboard" style="display: none;">
+  <div id="player-turn"></div>
+  <div id="scores"></div>
+</div>
+
+<div id="end-table" style="display: none;">
+  <h1>Game Over!</h1>
+    <table id="score-table">
+        <!-- Scores will be added here by the script -->
+    </table>
+    <button id="restart-button">Restart Game</button>
+</div>
+
+
+<div id="game-content" style="display: none;">
+
+  <section class="memory-game">
+    <div class="memory-card" data-framework="Cat">
+      <img class="front-face" src="../Memory/Animals/Cat.jpg" alt="Cat" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-framework="Cat">
+      <img class="front-face" src="../Memory/Animals/Cat.jpg" alt="Cat" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+
+    <div class="memory-card" data-framework="dolphin">
+      <img class="front-face" src="../Memory/Animals/dolphin.jpg" alt="dolphin" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-framework="dolphin">
+      <img class="front-face" src="../Memory/Animals/dolphin.jpg" alt="dolphin" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+
+    <div class="memory-card" data-framework="ducklings">
+      <img class="front-face" src="../Memory/Animals/ducklings.jpg" alt="ducklings" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-framework="ducklings">
+      <img class="front-face" src="../Memory/Animals/ducklings.jpg" alt="ducklings" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+
+    <div class="memory-card" data-framework="elephant">
+      <img class="front-face" src="../Memory/Animals/elephant.jpg" alt="elephant" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-framework="elephant">
+      <img class="front-face" src="../Memory/Animals/elephant.jpg" alt="elephant" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+
+    <div class="memory-card" data-framework="fox">
+      <img class="front-face" src="../Memory/Animals/fox.jpg" alt="fox" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-framework="fox">
+      <img class="front-face" src="../Memory/Animals/fox.jpg" alt="fox" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+
+    <div class="memory-card" data-framework="frog">
+      <img class="front-face" src="../Memory/Animals/frog.jpg" alt="frog" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-framework="frog">
+      <img class="front-face" src="../Memory/Animals/frog.jpg" alt="frog" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+
+    <div class="memory-card" data-framework="hedgehog">
+      <img class="front-face" src="../Memory/Animals/hedgehog.jpg" alt="hedgehog" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-framework="hedgehog">
+      <img class="front-face" src="../Memory/Animals/hedgehog.jpg" alt="hedgehog" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+
+    <div class="memory-card" data-framework="irelandSheep">
+      <img class="front-face" src="../Memory/Animals/irelandSheep.jpg" alt="irelandSheep" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-framework="irelandSheep">
+      <img class="front-face" src="../Memory/Animals/irelandSheep.jpg" alt="irelandSheep" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+
+    <div class="memory-card" data-framework="leopard">
+      <img class="front-face" src="../Memory/Animals/leopard.jpg" alt="leopard" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-framework="leopard">
+      <img class="front-face" src="../Memory/Animals/leopard.jpg" alt="leopard" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+
+    <div class="memory-card" data-framework="meerkat">
+      <img class="front-face" src="../Memory/Animals/meerkat.jpg" alt="meerkat" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-framework="meerkat">
+      <img class="front-face" src="../Memory/Animals/meerkat.jpg" alt="meerkat" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+
+    <div class="memory-card" data-framework="penguins">
+      <img class="front-face" src="../Memory/Animals/penguins.jpg" alt="penguins" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-framework="penguins">
+      <img class="front-face" src="../Memory/Animals/penguins.jpg" alt="penguins" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+
+    <div class="memory-card" data-framework="rabbit">
+      <img class="front-face" src="../Memory/Animals/rabbit.jpg" alt="rabbit" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-framework="rabbit">
+      <img class="front-face" src="../Memory/Animals/rabbit.jpg" alt="rabbit" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+
+    <div class="memory-card" data-framework="seaturtle">
+      <img class="front-face" src="../Memory/Animals/seaturtle.jpg" alt="seaturtle" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-framework="seaturtle">
+      <img class="front-face" src="../Memory/Animals/seaturtle.jpg" alt="seaturtle" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+
+
+    <div class="memory-card" data-framework="Strauss">
+      <img class="front-face" src="../Memory/Animals/strauss.jpg" alt="Strauss" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-framework="Strauss">
+      <img class="front-face" src="../Memory/Animals/strauss.jpg" alt="Strauss" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+
+    <div class="memory-card" data-framework="swan">
+      <img class="front-face" src="../Memory/Animals/swan.jpg" alt="swan" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-framework="swan">
+      <img class="front-face" src="../Memory/Animals/swan.jpg" alt="swan" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+  </section>
+</div> <!-- Game-content div -->
+
+
+
+
+
+
+
+
+
+
+<div id="game-board-hard" style="display: none;">
+
+  <section class="memory-game" display="none">
+    <div class="memory-card" data-framework="Mainecoon">
+      <img class="front-face" src="../Memory/Animals64/Mainecoon.jpg" alt="Mainecoon" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-framework="Mainecoon">
+      <img class="front-face" src="../Memory/Animals64/Mainecoon.jpg" alt="Mainecoon" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+
+    <div class="memory-card" data-framework="dolphin">
+      <img class="front-face" src="../Memory/Animals/dolphin.jpg" alt="dolphin" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-framework="dolphin">
+      <img class="front-face" src="../Memory/Animals/dolphin.jpg" alt="dolphin" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+
+    <div class="memory-card" data-framework="ducklings">
+      <img class="front-face" src="../Memory/Animals/ducklings.jpg" alt="ducklings" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-framework="ducklings">
+      <img class="front-face" src="../Memory/Animals/ducklings.jpg" alt="ducklings" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+
+    <div class="memory-card" data-framework="elephant">
+      <img class="front-face" src="../Memory/Animals/elephant.jpg" alt="elephant" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-framework="elephant">
+      <img class="front-face" src="../Memory/Animals/elephant.jpg" alt="elephant" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+
+    <div class="memory-card" data-framework="fox">
+      <img class="front-face" src="../Memory/Animals/fox.jpg" alt="fox" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-framework="fox">
+      <img class="front-face" src="../Memory/Animals/fox.jpg" alt="fox" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+
+    <div class="memory-card" data-framework="sloth">
+      <img class="front-face" src="../Memory/Animals64/sloth.jpg" alt="sloth" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-framework="sloth">
+      <img class="front-face" src="../Memory/Animals64/sloth.jpg" alt="sloth" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+
+    <div class="memory-card" data-framework="hedgehog">
+      <img class="front-face" src="../Memory/Animals/hedgehog.jpg" alt="hedgehog" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-framework="hedgehog">
+      <img class="front-face" src="../Memory/Animals/hedgehog.jpg" alt="hedgehog" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+
+    <div class="memory-card" data-framework="irelandSheep">
+      <img class="front-face" src="../Memory/Animals/irelandSheep.jpg" alt="irelandSheep" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-framework="irelandSheep">
+      <img class="front-face" src="../Memory/Animals/irelandSheep.jpg" alt="irelandSheep" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+
+    <div class="memory-card" data-framework="leopard">
+      <img class="front-face" src="../Memory/Animals/leopard.jpg" alt="leopard" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-framework="leopard">
+      <img class="front-face" src="../Memory/Animals/leopard.jpg" alt="leopard" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+
+    <div class="memory-card" data-framework="meerkat">
+      <img class="front-face" src="../Memory/Animals/meerkat.jpg" alt="meerkat" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-framework="meerkat">
+      <img class="front-face" src="../Memory/Animals/meerkat.jpg" alt="meerkat" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+
+    <div class="memory-card" data-framework="penguins">
+      <img class="front-face" src="../Memory/Animals/penguins.jpg" alt="penguins" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-framework="penguins">
+      <img class="front-face" src="../Memory/Animals/penguins.jpg" alt="penguins" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+
+    <div class="memory-card" data-framework="rabbit">
+      <img class="front-face" src="../Memory/Animals/rabbit.jpg" alt="rabbit" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-framework="rabbit">
+      <img class="front-face" src="../Memory/Animals/rabbit.jpg" alt="rabbit" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+
+    <div class="memory-card" data-framework="seaturtle">
+      <img class="front-face" src="../Memory/Animals/seaturtle.jpg" alt="seaturtle" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-framework="seaturtle">
+      <img class="front-face" src="../Memory/Animals/seaturtle.jpg" alt="seaturtle" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+
+
+    <div class="memory-card" data-framework="Strauss">
+      <img class="front-face" src="../Memory/Animals/strauss.jpg" alt="Strauss" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-framework="Strauss">
+      <img class="front-face" src="../Memory/Animals/strauss.jpg" alt="Strauss" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+
+    <div class="memory-card" data-framework="swan">
+      <img class="front-face" src="../Memory/Animals/swan.jpg" alt="swan" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-framework="swan">
+      <img class="front-face" src="../Memory/Animals/swan.jpg" alt="swan" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+
+    <div class="memory-card" data-framework="koala">
+      <img class="front-face" src="../Memory/Animals64/koala.jpg" alt="koala" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-framework="koala">
+      <img class="front-face" src="../Memory/Animals64/koala.jpg" alt="koala" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+
+    <div class="memory-card" data-framework="rabbit2">
+      <img class="front-face" src="../Memory/Animals64/rabbit2.jpg" alt="rabbit2" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-framework="rabbit2">
+      <img class="front-face" src="../Memory/Animals64/rabbit2.jpg" alt="rabbit2" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>   
+    
+    
+    
+    <div class="memory-card" data-framework="swisscows">
+      <img class="front-face" src="../Memory/Animals64/swisscows.jpg" alt="swisscows" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-framework="swisscows">
+      <img class="front-face" src="../Memory/Animals64/swisscows.jpg" alt="swisscows" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+
+    <div class="memory-card" data-framework="polarbear">
+      <img class="front-face" src="../Memory/Animals64/polarbear.jpg" alt="polarbear" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-framework="polarbear">
+      <img class="front-face" src="../Memory/Animals64/polarbear.jpg" alt="polarbear" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-framework="hirsch">
+      <img class="front-face" src="../Memory/Animals64/hirsch.jpg" alt="hirsch" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-framework="hirsch">
+      <img class="front-face" src="../Memory/Animals64/hirsch.jpg" alt="hirsch" />
+      <img class="back-face" src="../Memory/img/paw.svg" alt="JS Badge" />
+    </div>
+  </section>
+</div>
+
+
+  <script src="scripts.js"></script>
+</body>
+</html>
