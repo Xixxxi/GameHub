@@ -1,17 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Goodle Jump IOS</title>
+    <title>Goodle Jump</title>
     <link rel="stylesheet" href="style.css">
 
 </head>
 <body>
-    <canvas id="gameCanvas"></canvas>
+
+    <div id="welcomeScreen">
+        <h1>Willkommen zu <br> Goodle Jump!</h1>
+        <h2>Bitte wählen Sie einen Charakter</h2>
+        <div id="characterSelection">
+            <img src="../GoodleJumpIOS/CharacterCut.png" class="characterOption" data-character="../GoodleJumpIOS/CharacterCut.png">
+            <img src="../GoodleJumpIOS/obstacle.png" class="characterOption" data-character="../GoodleJumpIOS/obstacle.png">
+            <img src="../GoodleJumpIOS/ufoCut.png" class="characterOption" data-character="../GoodleJumpIOS/ufoCut.png">
+            
+            <!-- Weitere Charaktere hier hinzufügen -->
+        </div>
+        
+        <button id="startGameButton" style="display: none;">Spiel starten</button>
+    </div>
+
+    <canvas id="gameCanvas" style="display: none;"></canvas>
     <button id="back-btn">
         <a href="../../index.html">Go Back</a>
     </button>
-    
-    <button id="startButton">Press to Jump</button>
+
+
+    <button id="startButton" style="display: none;">Press to Jump</button>
 
     <div id="gameOverScreen" style="display: none;">
         <p id="finalScore"></p>

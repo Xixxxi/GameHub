@@ -7,13 +7,27 @@
 </head>
 <body>
 
-    <canvas id="gameCanvas"></canvas>
+    <div id="welcomeScreen">
+        <h1>Willkommen zu <br> Goodle Jump!</h1>
+        <h2>Bitte wählen Sie einen Charakter</h2>
+        <div id="characterSelection">
+            <img src="../GoodleJump/CharacterCut.png" class="characterOption" data-character="../GoodleJump/CharacterCut.png">
+            <img src="../GoodleJump/obstacle.png" class="characterOption" data-character="../GoodleJump/obstacle.png">
+            <img src="../GoodleJump/ufoCut.png" class="characterOption" data-character="../GoodleJump/ufoCut.png">
+            
+            <!-- Weitere Charaktere hier hinzufügen -->
+        </div>
+        
+        <button id="startGameButton" style="display: none;">Spiel starten</button>
+    </div>
+
+    <canvas id="gameCanvas" style="display: none;"></canvas>
     <button id="back-btn">
         <a href="../../index.html">Go Back</a>
     </button>
 
 
-    <button id="startButton">Press to Jump</button>
+    <button id="startButton" style="display: none;">Press to Jump</button>
 
     <div id="gameOverScreen" style="display: none;">
         <p id="finalScore"></p>

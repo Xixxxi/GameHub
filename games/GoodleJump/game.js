@@ -36,6 +36,39 @@ let score = 0;
 
 let animationFrameId; // Variable zur Speicherung der ID des Animation Frames
 
+// Welcome Screen
+const welcomeScreen = document.getElementById('welcomeScreen');
+const startGameButton = document.getElementById('startGameButton');
+const characterOptions = document.querySelectorAll('.characterOption');
+
+let selectedCharacter = '../GoodleJump/CharacterCut.png'; // Standardcharakter
+
+// Charakterauswahl
+characterOptions.forEach(option => {
+  option.addEventListener('click', function() {
+    selectedCharacter = this.getAttribute('data-character');
+    playerImage.src = selectedCharacter; // Setzt das Bild des ausgewählten Charakters
+    welcomeScreen.style.display = 'none';
+    document.getElementById('gameCanvas').style.display = 'block';
+    document.getElementById('startButton').style.display = 'block';
+    startGame();
+  });
+});
+
+
+
+// Spiel starten
+startGameButton.addEventListener('click', function() {
+  playerImage.src = selectedCharacter;
+  welcomeScreen.style.display = 'none';
+  document.getElementById('gameCanvas').style.display = 'block';
+  document.getElementById('startButton').style.display = 'block';
+  startGame();
+});
+
+// ... Rest Ihres aktuellen JavaScript-Codes ...
+
+
 // Event-Listener für Touch-Interaktionen
 canvas.addEventListener('touchstart', preventDefaultTouchEvents, { passive: false });
 canvas.addEventListener('touchend', preventDefaultTouchEvents, { passive: false });
