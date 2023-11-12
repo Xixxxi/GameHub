@@ -94,11 +94,12 @@ body, html {
   /* Back-Button Style */
 
 #back-btn{
-    position: absolute;
+    position: fixed;
     top: 100px; /* Adjust as needed */
     left: 10px; /* Adjust as needed */
-    z-index: 100;
+    z-index: 1000;
     background-color: red;
+    
     }
 
 a{

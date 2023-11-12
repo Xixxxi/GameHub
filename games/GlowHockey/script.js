@@ -30,6 +30,7 @@ document.addEventListener('touchmove', handleGoalkeeperTouchMove, { passive: fal
 document.addEventListener('touchend', handleGoalkeeperTouchEnd, { passive: false });
 
     function handleGoalkeeperTouchStart(e) {
+        if (e.target.id === 'externalLink') return;
         e.preventDefault(); // Prevent default to avoid any potential zoom behavior
         const touchedElement = e.target;
         if (touchedElement === goalkeeperTop || touchedElement === goalkeeperBottom) {
@@ -39,6 +40,7 @@ document.addEventListener('touchend', handleGoalkeeperTouchEnd, { passive: false
     }
 
     function handleGoalkeeperTouchMove(e) {
+        if (e.target.id === 'externalLink') return;
         e.preventDefault(); // Prevent default to avoid any potential zoom behavior
         Array.from(e.touches).forEach(touch => {
             const touchedElement = document.elementFromPoint(touch.clientX, touch.clientY);
@@ -49,6 +51,7 @@ document.addEventListener('touchend', handleGoalkeeperTouchEnd, { passive: false
     }
 
     function handleGoalkeeperTouchEnd(e) {
+        if (e.target.id === 'externalLink') return;
         e.preventDefault(); // Prevent default to avoid any potential zoom behavior
         Array.from(e.changedTouches).forEach(touch => {
             const goalkeeper = touch.target.isDragging ? touch.target : null;
@@ -71,6 +74,7 @@ document.addEventListener('touchend', handleGoalkeeperTouchEnd, { passive: false
     }
 
     function handlePuckTouchStart(e) {
+        if (e.target.id === 'externalLink') return;
         isDraggingPuck = true;
         shadowPuck.style.display = 'block';
         placeShadowPuck(e.touches[0]);
@@ -79,12 +83,14 @@ document.addEventListener('touchend', handleGoalkeeperTouchEnd, { passive: false
     }
 
     function handlePuckTouchMove(e) {
+        if (e.target.id === 'externalLink') return;
         if (isDraggingPuck) {
             placeShadowPuck(e.touches[0]);
         }
     }
 
     function handlePuckTouchEnd(e) {
+        if (e.target.id === 'externalLink') return;
         if (isDraggingPuck) {
             isDraggingPuck = false;
             shadowPuck.style.display = 'none';
