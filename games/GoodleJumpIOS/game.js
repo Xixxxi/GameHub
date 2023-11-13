@@ -14,11 +14,20 @@ canvas.height = window.innerHeight;
 const playerImage = new Image();
 playerImage.src = '../GoodleJumpIOS/CharacterCut.png'; // Pfad zum Spielerbild
 
+// Plattformbild laden
+const platformImage = new Image();
+platformImage.src = '../GoodleJumpIOS/Plattform.png'; // Pfad zum Plattformbild
+
+// Bewegende Plattform laden
+const stonePlatformImage = new Image();
+stonePlatformImage.src = '../GoodleJumpIOS/StonePlatform.png'; // Pfad zum Bild der Steinplattform
+
+
 const player = {
   x: canvas.width / 2,
-  y: canvas.height - 50,
-  width: 75,
-  height: 75,
+  y: canvas.height - 105,
+  width: 105,
+  height: 105,
   dx: 0,
   dy: 0
 };
@@ -26,15 +35,48 @@ const player = {
 let platforms = [];
 const platformCount = 6;
 const platformWidth = 110;
-const platformHeight = 15;
+const platformHeight = 20;
 let platGap = (canvas.height - 200) / platformCount;
-let gravity = 19; // 12.5 for Android
-let jumpPower = 36; // 28 for Android
+let gravity = 16; // 12.5 for Android
+let jumpPower = 22; // 28 for Android
 let isJumping = false;
 let gameStarted = false;
 let score = 0;
 
 let animationFrameId; // Variable zur Speicherung der ID des Animation Frames
+
+// Moving Platform start
+let movingPlatforms = [];
+const movingPlatformSpeed = 2; // Geschwindigkeit der beweglichen Plattformen
+
+function createMovingPlatform() {
+  movingPlatforms.push({
+    x: Math.random() * (canvas.width - platformWidth),
+    y: Math.random() * canvas.height / 2,
+    width: platformWidth,
+    height: platformHeight,
+    dx: movingPlatformSpeed
+  });
+}
+
+function updateMovingPlatforms() {
+  movingPlatforms.forEach(platform => {
+    // Horizontale Bewegung
+    platform.x += platform.dx;
+    // Umkehren der Richtung, wenn die Plattform den Rand erreicht
+    if (platform.x <= 0 || platform.x + platform.width >= canvas.width) {
+      platform.dx = -platform.dx;
+    }
+
+    // Vertikale Bewegung nach unten
+    if (player.y < canvas.height / 1.1) {
+      platform.y += 5; // Selbe Geschwindigkeit wie andere Plattformen
+    }
+  });
+}
+
+// Moving Platform end
+
 
 // Welcome Screen
 const welcomeScreen = document.getElementById('welcomeScreen');
@@ -113,10 +155,10 @@ function updatePlayer() {
 const obstacleImage = new Image();
 obstacleImage.src = '../GoodleJumpIOS/obstacle.png'; // Pfad zum Hindernisbild
 let obstacle = {
-  x: -125, // Start außerhalb des Bildschirms
+  x: -135, // Start außerhalb des Bildschirms
   y: 0,
-  width: 125,
-  height: 75,
+  width: 135,
+  height: 85,
   dx: 0 // Anfangsgeschwindigkeit
 };
 // Funktionen für Hindernis
@@ -131,7 +173,7 @@ function updateObstacle() {
   // Hindernis zurücksetzen, wenn es den Bildschirm verlässt
   if (obstacle.x + obstacle.width < 0) {
     obstacle.dx = 0;
-    obstacle.x = -125; // Zurück zum Startpunkt außerhalb des Bildschirms
+    obstacle.x = -135; // Zurück zum Startpunkt außerhalb des Bildschirms
   }
 }
 function checkCollisionWithObstacle() {
@@ -147,10 +189,10 @@ function checkCollisionWithObstacle() {
 const secondObstacleImage = new Image();
 secondObstacleImage.src = '../GoodleJumpIOS/ufoCut.png'; // Pfad zum zweiten Hindernisbild
 let secondObstacle = {
-  x: -125, // Start außerhalb des Bildschirms
+  x: -135, // Start außerhalb des Bildschirms
   y: 0,
-  width: 125,
-  height: 75,
+  width: 135,
+  height: 85,
   dx: 0 // Anfangsgeschwindigkeit
 };
 // Funktionen für Hindernis 2
@@ -164,7 +206,7 @@ function updateSecondObstacle() {
   secondObstacle.x += secondObstacle.dx;
   if (secondObstacle.x + secondObstacle.width < 0) {
     secondObstacle.dx = 0;
-    secondObstacle.x = -125;
+    secondObstacle.x = -135;
   }
 }
 function checkCollisionWithSecondObstacle() {
@@ -198,6 +240,22 @@ function collisionDetection() {
       }, 500);
     }
   });
+
+    // Überprüfung der Kollision mit beweglichen Plattformen
+    movingPlatforms.forEach(function(platform) {
+      if (
+        player.x < platform.x + platform.width &&
+        player.x + player.width > platform.x &&
+        player.y + player.height > platform.y &&
+        player.y < platform.y + platform.height &&
+        player.dy >= 0
+      ) {
+        isJumping = true;
+        setTimeout(function() {
+          isJumping = false;
+        }, 500);
+      }
+    });
 }
 
 
@@ -214,11 +272,13 @@ function generatePlatform(newY) {
 // Aktualisierung und Scrollen der Plattformen
 function updatePlatforms() {
   if (player.y < canvas.height / 1.15) {
-    platforms.forEach(p => p.y += 10); // 6 for Android
+    platforms.forEach(p => p.y += 7); // 6 for Android
   }
 
   // Entfernt Plattformen, die unterhalb des Bildschirms sind, oder die berührt wurden
   platforms = platforms.filter(p => p.y < canvas.height && !p.touched);
+  // Entfernen beweglicher Plattformen, die unterhalb des Bildschirms sind
+  movingPlatforms = movingPlatforms.filter(platform => platform.y < canvas.height);
 
   while (platforms.length < platformCount) {
     let lastPlatform = platforms[platforms.length - 1] || { y: canvas.height };
@@ -266,19 +326,30 @@ function gameLoop() {
   updatePlayer();
   collisionDetection();
 
-  // Zeichnen der Plattformen
-  platforms.forEach(function(p) {
-    ctx.fillStyle = '#8B4513';
-    ctx.fillRect(p.x, p.y, p.width, p.height);
-  });
+  // Zeichnen der Plattformen ohne Bild
+  // platforms.forEach(function(p) {
+  //   ctx.fillStyle = '#8B4513';
+  //   ctx.fillRect(p.x, p.y, p.width, p.height);
+  // });
+  
+    // Zeichnen der Plattformen mit dem Plattformbild
+    platforms.forEach(function(p) {
+      ctx.drawImage(platformImage, p.x, p.y, p.width, p.height);
+    });
 
 
-  if(score>3){
+  if(score>10){
     // Aktualisieren und Zeichnen des Hindernisses
     updateObstacle();
     checkCollisionWithObstacle();
     ctx.drawImage(obstacleImage, obstacle.x, obstacle.y, obstacle.width, obstacle.height);
   }
+
+  // Bewegliche Plattformen erzeugen
+  if (score >= 5 && Math.random() < 0.004) { // Ähnliche Rate wie bei den Hindernissen
+    createMovingPlatform();
+  }
+  updateMovingPlatforms();
 
   if (score>30){
     updateSecondObstacle();
@@ -288,6 +359,11 @@ function gameLoop() {
 
   // Zeichnen des Spielers
   ctx.drawImage(playerImage, player.x, player.y, player.width, player.height);
+
+  // Zeichnen der beweglichen Plattformen
+  movingPlatforms.forEach(platform => {
+    ctx.drawImage(stonePlatformImage, platform.x, platform.y, platform.width, platform.height);
+  });
 
   // Anzeige des Scores
   ctx.font = '34px Arial'; // Größere Schriftgröße
@@ -307,7 +383,7 @@ function gameLoop() {
 // Touch-Steuerung für den Spieler
 function handleTouchStart(event) {
   let touchX = event.type === 'touchstart' ? event.touches[0].clientX : event.clientX;
-  player.dx = touchX < canvas.width / 2 ? -20 : 20; // -10:10 for Android
+  player.dx = touchX < canvas.width / 2 ? -17 : 17; // -10:10 for Android
 }
 
 function handleTouchEnd() {
