@@ -22,7 +22,174 @@ platformImage.src = '../GoodleJumpIOS/Plattform.png'; // Pfad zum Plattformbild
 const stonePlatformImage = new Image();
 stonePlatformImage.src = '../GoodleJumpIOS/StonePlatform.png'; // Pfad zum Bild der Steinplattform
 
+// Shield start
+const shieldImage = new Image();
+shieldImage.src = '../GoodleJumpIOS/shield.png'; // Pfad zum Shield-Bild
 
+let shields = [];
+
+function placeShieldOnPlatform(platform) {
+  shields.push({
+    x: platform.x + platform.width / 2 - 35, // Shield in der Mitte der Plattform
+    y: platform.y - 80, // Shield über der Plattform
+    width: 70,
+    height: 80,
+    platform: platform
+  });
+}
+
+function updateAndDrawShields() {
+  for (let i = shields.length - 1; i >= 0; i--) {
+    let shield = shields[i];
+    // Shield mit Plattform bewegen
+    shield.x = shield.platform.x + shield.platform.width / 2 - 40;
+    shield.y = shield.platform.y - 80;
+
+    // Shield zeichnen
+    ctx.drawImage(shieldImage, shield.x, shield.y, shield.width, shield.height);
+
+    // Entfernen, wenn die Plattform entfernt wird
+    if (shield.platform.y >= canvas.height || !platforms.includes(shield.platform)) {
+      shields.splice(i, 1);
+    }
+  }
+}
+
+let shieldActive = false;
+let shieldActivationTime;
+let shieldEndTime = 0; // Zeitpunkt, wann der Schild enden soll
+
+function checkCollisionWithShields() {
+  for (let i = shields.length - 1; i >= 0; i--) {
+    let shield = shields[i];
+    if (player.x < shield.x + shield.width &&
+        player.x + player.width > shield.x &&
+        player.y < shield.y + shield.height &&
+        player.y + player.height > shield.y) {
+      shieldActive = true;
+      shieldEndTime = Date.now() + 5000; // 5 Sekunden in die Zukunft
+      shields.splice(i, 1); // Shield entfernen
+    }
+  }
+}
+
+function drawShield() {
+  if (shieldActive && Date.now() < shieldEndTime) {
+    ctx.beginPath();
+    ctx.arc(player.x + player.width / 2, player.y + player.height / 2, player.width, 0, 2 * Math.PI);
+    ctx.fillStyle = "rgba(173, 216, 230, 0.5)"; // Hellblau, halbtransparent
+    ctx.fill();
+  } else if (Date.now() >= shieldEndTime) {
+    shieldActive = false;
+  }
+}
+
+// shield end
+
+
+// Coin Obstacle start
+const coinImage = new Image();
+coinImage.src = '../GoodleJumpIOS/coin.png'; // Pfad zum Coin-Bild
+
+let coin = {
+  x: -80, // Startposition außerhalb des Bildschirms
+  y: 0,
+  width: 80, // Angepasste Größe nach Bedarf
+  height: 80,
+  dx: -5, // Geschwindigkeit
+};
+
+let coins = [];
+
+function placeCoinOnPlatform(platform) {
+  coins.push({
+    x: platform.x + platform.width / 2 - 25, // Münze in der Mitte der Plattform
+    y: platform.y - 55, // Münze über der Plattform
+    width: 55,
+    height: 55,
+    platform: platform
+  });
+}
+
+function updateAndDrawCoins() {
+  for (let i = coins.length - 1; i >= 0; i--) {
+    let coin = coins[i];
+    // Münze mit Plattform bewegen
+    coin.x = coin.platform.x + coin.platform.width / 2 - 25;
+    coin.y = coin.platform.y - 80;
+    // Münze zeichnen
+    ctx.drawImage(coinImage, coin.x, coin.y, coin.width, coin.height);
+    // Entfernen, wenn die Plattform entfernt wird
+    if (coin.platform.y > canvas.height || !platforms.includes(coin.platform)) {
+      coins.splice(i, 1);
+    }
+  }
+}
+
+function checkCollisionWithCoins() {
+  for (let i = coins.length - 1; i >= 0; i--) {
+    let coin = coins[i];
+    if (player.x < coin.x + coin.width &&
+        player.x + player.width > coin.x &&
+        player.y < coin.y + coin.height &&
+        player.y + player.height > coin.y) {
+      score += 1; // Score um 1 erhöhen
+      coins.splice(i, 1); // Münze entfernen
+    }
+  }
+}
+// Coin Ende
+
+
+// Nutella Obstacle start
+const nutellaObstacleImage = new Image();
+nutellaObstacleImage.src = '../GoodleJumpIOS/nutella.png'; // Pfad zum Nutella-Hindernisbild
+
+let nutellaObstacle = {
+  x: -80,
+  y: 0,
+  width: 80,
+  height: 90,
+  dx: 0
+};
+
+function updateNutellaObstacle() {
+  if (gameStarted && Math.random() < 0.001 && nutellaObstacle.x < 0) {
+    nutellaObstacle.x = canvas.width;
+    nutellaObstacle.y = Math.random() * (canvas.height - nutellaObstacle.height);
+    nutellaObstacle.dx = -5;
+  }
+  nutellaObstacle.x += nutellaObstacle.dx;
+
+  if (nutellaObstacle.x + nutellaObstacle.width < 0) {
+    nutellaObstacle.dx = 0;
+    nutellaObstacle.x = -80;
+  }
+}
+
+let jumpPowerEffectTimeout;
+
+function checkCollisionWithNutellaObstacle() {
+  if (!shieldActive && player.x < nutellaObstacle.x + nutellaObstacle.width &&
+    player.x + player.width > nutellaObstacle.x &&
+    player.y < nutellaObstacle.y + nutellaObstacle.height &&
+    player.y + player.height > nutellaObstacle.y) {
+    nutellaObstacle.x = -80; // Entfernt das Hindernis
+
+    if (!jumpPowerEffectTimeout) {
+      jumpPower /= 1.75;
+      jumpPowerEffectTimeout = setTimeout(() => {
+        jumpPower *= 1.75;
+        jumpPowerEffectTimeout = null;
+      }, 3000);
+    }
+  }
+}
+// Nutella Obstacle end
+
+
+
+// Player Stats
 const player = {
   x: canvas.width / 2,
   y: canvas.height - 105,
@@ -74,7 +241,6 @@ function updateMovingPlatforms() {
     }
   });
 }
-
 // Moving Platform end
 
 
@@ -98,7 +264,6 @@ characterOptions.forEach(option => {
 });
 
 
-
 // Spiel starten
 startGameButton.addEventListener('click', function() {
   playerImage.src = selectedCharacter;
@@ -120,35 +285,55 @@ canvas.addEventListener('touchmove', preventDefaultTouchEvents, { passive: false
 function createPlatforms() {
   for (let i = 0; i < platformCount; i++) {
     let platY = canvas.height - 200 - i * platGap;
-    platforms.push({
+    let newPlatform = {
       x: Math.random() * (canvas.width - platformWidth),
       y: platY,
       width: platformWidth,
       height: platformHeight
-    });
+    };
+    platforms.push(newPlatform);
+    placeCoinOnPlatform(newPlatform); // Münze auf jeder neuen Plattform platzieren
   }
 }
-
 createPlatforms();
 
 // Aktualisierung der Spielerposition
 function updatePlayer() {
-  player.dy = isJumping ? -jumpPower : gravity;
+  if (isJumping) {
+    player.dy = -jumpPower;
+  } else {
+    player.dy = gravity;
+  }
   player.y += player.dy;
   player.x += player.dx;
 
-  // Wrap-Around-Logik für den Spieler
-  if (player.x + player.width < 0) {
-    player.x = canvas.width;
-  } else if (player.x > canvas.width) {
+  // Wrap-Around-Logik für den horizontalen Bildschirmrand
+  if (player.x > canvas.width) {
     player.x = -player.width;
+  } else if (player.x < -player.width) {
+    player.x = canvas.width;
   }
-
+  // Spieler am oberen Bildschirmrand halten
+  if (player.y < 105) {
+    movePlatformsDown(player.y - 105);
+    player.y = 105;
+  }
+  // Spieler am unteren Bildschirmrand halten
   if (player.y > canvas.height - player.height) {
     player.y = canvas.height - player.height;
     isJumping = false;
   }
+
+  // ... Rest der Funktion ...
 }
+
+
+// Funktion, um Plattformen nach unten zu bewegen
+function movePlatformsDown(offset) {
+  platforms.forEach(p => p.y -= offset);
+  coins.forEach(coin => coin.y -= offset); // Münzen ebenfalls bewegen
+}
+
 
 
 // Hinderniss
@@ -161,7 +346,7 @@ let obstacle = {
   height: 85,
   dx: 0 // Anfangsgeschwindigkeit
 };
-// Funktionen für Hindernis
+// Funktionen für Hindernis (Flugzeug)
 function updateObstacle() {
   // Hindernis erscheint zufällig
   if (gameStarted && Math.random() < 0.005 && obstacle.x < 0) { // 0.5% Chance pro Frame, dass das Hindernis erscheint
@@ -177,15 +362,15 @@ function updateObstacle() {
   }
 }
 function checkCollisionWithObstacle() {
-  if (player.x < obstacle.x + obstacle.width &&
-      player.x + player.width > obstacle.x &&
-      player.y < obstacle.y + obstacle.height &&
-      player.y + player.height > obstacle.y) {
+  if (!shieldActive && player.x < obstacle.x + obstacle.width &&
+    player.x + player.width > obstacle.x &&
+    player.y < obstacle.y + obstacle.height &&
+    player.y + player.height > obstacle.y) {
     gameOver();
   }
 }
 
-// Hindernis 2
+// Hindernis 2 (Ufo)
 const secondObstacleImage = new Image();
 secondObstacleImage.src = '../GoodleJumpIOS/ufoCut.png'; // Pfad zum zweiten Hindernisbild
 let secondObstacle = {
@@ -271,20 +456,39 @@ function generatePlatform(newY) {
 
 // Aktualisierung und Scrollen der Plattformen
 function updatePlatforms() {
-  if (player.y < canvas.height / 1.15) {
-    platforms.forEach(p => p.y += 7); // 6 for Android
-  }
+  // Bewegt vorhandene Plattformen und entfernt sie, wenn sie den Bildschirm verlassen
+  platforms.forEach(p => {
+    if (player.y < canvas.height / 1.1) {
+      p.y += 7; // 6 for Android
+    }
+  });
 
-  // Entfernt Plattformen, die unterhalb des Bildschirms sind, oder die berührt wurden
-  platforms = platforms.filter(p => p.y < canvas.height && !p.touched);
-  // Entfernen beweglicher Plattformen, die unterhalb des Bildschirms sind
-  movingPlatforms = movingPlatforms.filter(platform => platform.y < canvas.height);
+  platforms = platforms.filter(p => p.y < canvas.height);
 
+  // Generiert neue Plattformen und fügt zufällig Münzen hinzu
   while (platforms.length < platformCount) {
-    let lastPlatform = platforms[platforms.length - 1] || { y: canvas.height };
-    platforms.push(generatePlatform(lastPlatform.y - platGap));
+    let lastPlatform = platforms[platforms.length - 1];
+    let newY = lastPlatform.y - platGap;
+    let newPlatform = {
+      x: Math.random() * (canvas.width - platformWidth),
+      y: newY,
+      width: platformWidth,
+      height: platformHeight
+    };
+    platforms.push(newPlatform);
+
+    // Zufällige Chance, eine Münze auf der neuen Plattform zu platzieren
+    if (Math.random() < 0.3) { // Hier können Sie die Wahrscheinlichkeit anpassen
+      placeCoinOnPlatform(newPlatform);
+    }
+
+    // Zufällige Chance, ein Schild auf der neuen Plattform zu platzieren
+    if (Math.random() < 0.03) { // 3% Wahrscheinlichkeit
+      placeShieldOnPlatform(newPlatform);
+    }
   }
 }
+
 
 // GameOver Funktionen
 function gameOver() {
@@ -317,41 +521,64 @@ document.getElementById('reloadButton').addEventListener('click', function() {
 
 
 
-
-
 // Spiel-Hauptschleife
 function gameLoop() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   updatePlatforms();
+  updateAndDrawCoins();
   updatePlayer();
   collisionDetection();
-
-  // Zeichnen der Plattformen ohne Bild
-  // platforms.forEach(function(p) {
-  //   ctx.fillStyle = '#8B4513';
-  //   ctx.fillRect(p.x, p.y, p.width, p.height);
-  // });
   
     // Zeichnen der Plattformen mit dem Plattformbild
     platforms.forEach(function(p) {
       ctx.drawImage(platformImage, p.x, p.y, p.width, p.height);
     });
 
+  // shield Logic
+  updateAndDrawShields();
+  checkCollisionWithShields();
+  // Zeichnen des Schutzschilds, wenn aktiv
+  if (shieldActive) {
+    drawShield();
+  }
+  // shield ende
 
-  if(score>10){
+  
+  // Update-Logik für Coin
+  updateAndDrawCoins();
+  checkCollisionWithCoins();
+  // Coin ende
+  
+  // Bewegliche Plattformen erzeugen
+  if (score >= 10 && Math.random() < 0.004) { // Ähnliche Rate wie bei den Hindernissen
+    createMovingPlatform();
+  }
+    updateMovingPlatforms();
+  // Zeichnen der beweglichen Plattformen
+  movingPlatforms.forEach(platform => {
+    ctx.drawImage(stonePlatformImage, platform.x, platform.y, platform.width, platform.height);
+  });
+  
+  // Flugzeug
+  if(score>25){
     // Aktualisieren und Zeichnen des Hindernisses
     updateObstacle();
     checkCollisionWithObstacle();
     ctx.drawImage(obstacleImage, obstacle.x, obstacle.y, obstacle.width, obstacle.height);
   }
-
-  // Bewegliche Plattformen erzeugen
-  if (score >= 5 && Math.random() < 0.004) { // Ähnliche Rate wie bei den Hindernissen
-    createMovingPlatform();
+  // Update-Logik für Nutella-Hindernis...
+  if (score >= 40) {
+    updateNutellaObstacle();
+    checkCollisionWithNutellaObstacle();
   }
-  updateMovingPlatforms();
+  // Zeichnen des Nutella-Hindernisses, wenn es sich auf dem Bildschirm befindet
+  if (nutellaObstacle.x >= 0) {
+    ctx.drawImage(nutellaObstacleImage, nutellaObstacle.x, nutellaObstacle.y, nutellaObstacle.width, nutellaObstacle.height);
+  }
+  // Nutella ende
 
-  if (score>30){
+  // Ufo 
+  if (score>60){
     updateSecondObstacle();
     checkCollisionWithSecondObstacle();
     ctx.drawImage(secondObstacleImage, secondObstacle.x, secondObstacle.y, secondObstacle.width, secondObstacle.height);  
@@ -359,11 +586,6 @@ function gameLoop() {
 
   // Zeichnen des Spielers
   ctx.drawImage(playerImage, player.x, player.y, player.width, player.height);
-
-  // Zeichnen der beweglichen Plattformen
-  movingPlatforms.forEach(platform => {
-    ctx.drawImage(stonePlatformImage, platform.x, platform.y, platform.width, platform.height);
-  });
 
   // Anzeige des Scores
   ctx.font = '34px Arial'; // Größere Schriftgröße
