@@ -1,55 +1,18 @@
 body, html {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #c3d2f6;
-    background-image: url("../GoodleJumpIOS/background.png");
-  }
-  
-  #gameCanvas {
-    border: 1px solid black;
-  }
-  
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #c3d2f6;
+  background-image: url("../GoodleJumpIOS/public/background.png");
+}
 
-  /* StartButton */
-  #startButton {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 100px 200px;
-    font-size: 120px;
-    cursor: pointer;
-    border: 20px outset rgba(0, 0, 255, .2);
-    border-radius: 50%;
-    box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);
-  }
-  
+#gameCanvas {
+  border: 1px solid black;
+}
 
-  /* GameOver Screen */
-  #gameOverScreen {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    font-size: 120px;
-  }
-  
-  #reloadButton {
-    padding: 100px 200px;
-    font-size: 100px;
-    cursor: pointer;
-
-    border: 20px outset rgba(0, 0, 255, .2);
-    border-radius: 50%;
-    box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);
-  }
-  
-  
 /* Back-Button Style */
 
 a{
@@ -64,30 +27,134 @@ left: 30px; /* Adjust as needed */
 font-size: 46px;
 }
 
+
+/* Info div START*/
+#infoButton{
+  /* background-color: red; */
+  background: transparent;
+  color: white;
+  padding: 100px;
+  font-size: 94px;
+  border: none;
+  border-radius: 15%;
+  margin-top: 3vh;
+  margin-left: 30vh;
+}
+
+/* Info Button & div */
+#infoDiv {
+position: fixed;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+width: 80%;
+max-width: 600px;
+background: rgba(0, 0, 0, 1); /*4ter Wet regelt Opacity*/
+color: white;
+padding: 20px;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+text-align: center;
+z-index: 1000; /* Sorgt dafür, dass das Div über anderen Elementen liegt */
+
+border: outset white;
+border-radius: 5%;
+}
+#infoDiv h2{
+  font-size: 42px;
+
+}
+#infoDiv p {
+margin-bottom: 20px;
+font-size: 32px;
+}
+#closeInfo {
+border: outset white;
+border-radius: 10px;
+margin-top: 20px;
+margin-bottom: 20px;
+font-size: 38px;
+
+padding: 2px 60px;
+}
+
+.infoItem {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px; /* Abstand zwischen den Elementen */
+}
+
+.infoIcon {
+  flex-shrink: 0; /* Verhindert das Verkleinern des Icons */
+  width: 70px;
+  height: 70px; /* Feste Höhe für Konsistenz */
+  margin-right: 20px; /* Abstand zwischen Icon und Text */
+}
+
+.infoItem p {
+  text-align: left; /* Linksbündige Ausrichtung des Textes */
+  flex-grow: 1; /* Erlaubt dem Text, verfügbaren Raum einzunehmen */
+}
+/* Info div ENDE*/
+
+
+/* StartButton */
+#startButton {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 100px 200px;
+  font-size: 120px;
+  cursor: pointer;
+  border: 20px outset rgba(0, 0, 255, .2);
+  border-radius: 50%;
+  box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);
+}
+
+
+/* GameOver Screen */
+#gameOverScreen {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  font-size: 120px;
+}
+
+#reloadButton {
+  padding: 100px 200px;
+  font-size: 100px;
+  cursor: pointer;
+
+  border: 20px outset rgba(0, 0, 255, .2);
+  border-radius: 50%;
+  box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);
+}
+
 /* Welcome Screen */
 
 #welcomeScreen {
-  position: absolute;
-  display:flex;
-  flex-direction: column;
-  justify-content: center;
-  /* transform: translate(-50%, -50%); */
-  text-align: center;
-  font-size: 36px;
-  
-  z-index: 100;
-  }
-  #welcomeScreen h1 {
-  font-size: 100px;
-  }
-  
-  .characterOption {
-  cursor: pointer;
-  margin: 20px;
-  }
-  
-  #welcomeScreen img{
-  width: 14vw;
-  }
-  
-  
+position: absolute;
+display:flex;
+flex-direction: column;
+justify-content: center;
+/* transform: translate(-50%, -50%); */
+text-align: center;
+font-size: 36px;
+
+z-index: 100;
+}
+#welcomeScreen h1 {
+font-size: 100px;
+}
+
+.characterOption {
+cursor: pointer;
+margin: 20px;
+}
+
+#welcomeScreen img{
+width: 14vw;
+}
+

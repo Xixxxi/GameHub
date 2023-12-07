@@ -5,6 +5,21 @@ function preventDefaultTouchEvents(event) {
   }
 }
 
+// Info Buttons
+document.getElementById('infoButton').addEventListener('click', function() {
+  const infoDiv = document.getElementById('infoDiv');
+  // Prüft, ob das Info-Div sichtbar ist, und schaltet die Sichtbarkeit um
+  if (infoDiv.style.display === 'block') {
+      infoDiv.style.display = 'none';
+  } else {
+      infoDiv.style.display = 'block';
+  }
+});
+document.getElementById('closeInfo').addEventListener('click', function() {
+  document.getElementById('infoDiv').style.display = 'none';
+});
+
+
 // Initialisierung des Canvas und der Spielvariablen
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
@@ -12,19 +27,83 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 const playerImage = new Image();
-playerImage.src = '../GoodleJump/CharacterCut.png'; // Pfad zum Spielerbild
+playerImage.src = '../GoodleJump/public/CharacterCut.png'; // Pfad zum Spielerbild
 
 // Plattformbild laden
 const platformImage = new Image();
-platformImage.src = '../GoodleJump/Plattform.png'; // Pfad zum Plattformbild
+platformImage.src = '../GoodleJump/public/Plattform.png'; // Pfad zum Plattformbild
 
 // Bewegende Plattform laden
 const stonePlatformImage = new Image();
-stonePlatformImage.src = '../GoodleJump/StonePlatform.png'; // Pfad zum Bild der Steinplattform
+stonePlatformImage.src = '../GoodleJump/public/StonePlatform.png'; // Pfad zum Bild der Steinplattform
+
+
+
+
+
+
+
+
+
+// Coin Obstacle start
+const coinImage = new Image();
+coinImage.src = '../GoodleJump/public/coin.png'; // Pfad zum Coin-Bild
+
+let coin = {
+  x: -80, // Startposition außerhalb des Bildschirms
+  y: 0,
+  width: 80, // Angepasste Größe nach Bedarf
+  height: 80,
+  dx: -5, // Geschwindigkeit
+};
+
+let coins = [];
+
+function placeCoinOnPlatform(platform) {
+  coins.push({
+    x: platform.x + platform.width / 2 - 25, // Münze in der Mitte der Plattform
+    y: platform.y - 55, // Münze über der Plattform
+    width: 55,
+    height: 55,
+    platform: platform
+  });
+}
+
+function updateAndDrawCoins() {
+  for (let i = coins.length - 1; i >= 0; i--) {
+    let coin = coins[i];
+    // Münze mit Plattform bewegen
+    coin.x = coin.platform.x + coin.platform.width / 2 - 25;
+    coin.y = coin.platform.y - 80;
+    // Münze zeichnen
+    ctx.drawImage(coinImage, coin.x, coin.y, coin.width, coin.height);
+    // Entfernen, wenn die Plattform entfernt wird
+    if (coin.platform.y > canvas.height || !platforms.includes(coin.platform)) {
+      coins.splice(i, 1);
+    }
+  }
+}
+
+function checkCollisionWithCoins() {
+  for (let i = coins.length - 1; i >= 0; i--) {
+    let coin = coins[i];
+    if (player.x < coin.x + coin.width &&
+        player.x + player.width > coin.x &&
+        player.y < coin.y + coin.height &&
+        player.y + player.height > coin.y) {
+      score += 1; // Score um 1 erhöhen
+      coins.splice(i, 1); // Münze entfernen
+    }
+  }
+}
+// Coin Ende
+
+
+
 
 // Shield start
 const shieldImage = new Image();
-shieldImage.src = '../GoodleJump/shield.png'; // Pfad zum Shield-Bild
+shieldImage.src = '../GoodleJump/public/shield.png'; // Pfad zum Shield-Bild
 
 let shields = [];
 
@@ -83,67 +162,78 @@ function drawShield() {
     shieldActive = false;
   }
 }
-
 // shield end
 
+//Tequila START
+const tequilaImage = new Image();
+tequilaImage.src = '../GoodleJump/public/tequila.png'; // Pfad zum Tequila-Bild
 
-// Coin Obstacle start
-const coinImage = new Image();
-coinImage.src = '../GoodleJump/coin.png'; // Pfad zum Coin-Bild
-
-let coin = {
-  x: -80, // Startposition außerhalb des Bildschirms
+let tequila = {
+  x: -85, // Startposition außerhalb des Bildschirms
   y: 0,
-  width: 80, // Angepasste Größe nach Bedarf
-  height: 80,
+  width: 65, // Angepasste Größe nach Bedarf
+  height: 85,
   dx: -5, // Geschwindigkeit
 };
+let tequilas = [];
 
-let coins = [];
-
-function placeCoinOnPlatform(platform) {
-  coins.push({
-    x: platform.x + platform.width / 2 - 25, // Münze in der Mitte der Plattform
-    y: platform.y - 55, // Münze über der Plattform
-    width: 55,
-    height: 55,
+function placeTequilaOnPlatform(platform) {
+  tequilas.push({
+    x: platform.x + platform.width / 2 - 32.5, // Tequila in der Mitte der Plattform
+    y: platform.y - 85, // Tequila über der Plattform
+    width: 65,
+    height: 85,
     platform: platform
   });
 }
-
-function updateAndDrawCoins() {
-  for (let i = coins.length - 1; i >= 0; i--) {
-    let coin = coins[i];
-    // Münze mit Plattform bewegen
-    coin.x = coin.platform.x + coin.platform.width / 2 - 25;
-    coin.y = coin.platform.y - 80;
-    // Münze zeichnen
-    ctx.drawImage(coinImage, coin.x, coin.y, coin.width, coin.height);
+function updateAndDrawTequilas() {
+  for (let i = tequilas.length - 1; i >= 0; i--) {
+    let tequila = tequilas[i];
+    // Tequila mit Plattform bewegen
+    tequila.x = tequila.platform.x + tequila.platform.width / 2 - 32.5;
+    tequila.y = tequila.platform.y - 85;
+    // Tequila zeichnen
+    ctx.drawImage(tequilaImage, tequila.x, tequila.y, tequila.width, tequila.height);
     // Entfernen, wenn die Plattform entfernt wird
-    if (coin.platform.y > canvas.height || !platforms.includes(coin.platform)) {
-      coins.splice(i, 1);
+    if (tequila.platform.y > canvas.height || !platforms.includes(tequila.platform)) {
+      tequilas.splice(i, 1);
     }
   }
 }
+function checkCollisionWithTequilas() {
+  for (let i = tequilas.length - 1; i >= 0; i--) {
+    let tequila = tequilas[i];
+    if (player.x < tequila.x + tequila.width &&
+        player.x + player.width > tequila.x &&
+        player.y < tequila.y + tequila.height &&
+        player.y + player.height > tequila.y) {
+      // Zufällige Plattform neu positionieren
+      if (platforms.length > 0) {
+        const randomIndex = Math.floor(Math.random() * platforms.length);
+        const randomPlatform = platforms[randomIndex];
+        
+        // Neue zufällige Position für die Plattform festlegen
+        randomPlatform.x = Math.random() * (canvas.width - randomPlatform.width);
+        randomPlatform.y = canvas.height - 200 - randomIndex * platGap;
+      }
 
-function checkCollisionWithCoins() {
-  for (let i = coins.length - 1; i >= 0; i--) {
-    let coin = coins[i];
-    if (player.x < coin.x + coin.width &&
-        player.x + player.width > coin.x &&
-        player.y < coin.y + coin.height &&
-        player.y + player.height > coin.y) {
-      score += 1; // Score um 1 erhöhen
-      coins.splice(i, 1); // Münze entfernen
+      tequilas.splice(i, 1); // Tequila entfernen
     }
   }
 }
-// Coin Ende
+//Tequila END
+
+
+
+
+
+
+
 
 
 // Nutella Obstacle start
 const nutellaObstacleImage = new Image();
-nutellaObstacleImage.src = '../GoodleJump/nutella.png'; // Pfad zum Nutella-Hindernisbild
+nutellaObstacleImage.src = '../GoodleJump/public/nutella.png'; // Pfad zum Nutella-Hindernisbild
 
 let nutellaObstacle = {
   x: -80,
@@ -247,9 +337,11 @@ function updateMovingPlatforms() {
 // Welcome Screen
 const welcomeScreen = document.getElementById('welcomeScreen');
 const startGameButton = document.getElementById('startGameButton');
-const characterOptions = document.querySelectorAll('.characterOption');
 
-let selectedCharacter = '../GoodleJump/CharacterCut.png'; // Standardcharakter
+
+// Charakterwahl
+const characterOptions = document.querySelectorAll('.characterOption');
+let selectedCharacter = '../GoodleJump/public/man.png'; // Standardcharakter
 
 // Charakterauswahl
 characterOptions.forEach(option => {
@@ -262,6 +354,7 @@ characterOptions.forEach(option => {
     startGame();
   });
 });
+
 
 
 // Spiel starten
@@ -338,12 +431,12 @@ function movePlatformsDown(offset) {
 
 // Hinderniss
 const obstacleImage = new Image();
-obstacleImage.src = '../GoodleJump/obstacle.png'; // Pfad zum Hindernisbild
+obstacleImage.src = '../GoodleJump/public/obstacle.png'; // Pfad zum Hindernisbild
 let obstacle = {
-  x: -135, // Start außerhalb des Bildschirms
+  x: -155, // Start außerhalb des Bildschirms
   y: 0,
-  width: 135,
-  height: 85,
+  width: 155,
+  height: 105,
   dx: 0 // Anfangsgeschwindigkeit
 };
 // Funktionen für Hindernis (Flugzeug)
@@ -358,7 +451,7 @@ function updateObstacle() {
   // Hindernis zurücksetzen, wenn es den Bildschirm verlässt
   if (obstacle.x + obstacle.width < 0) {
     obstacle.dx = 0;
-    obstacle.x = -135; // Zurück zum Startpunkt außerhalb des Bildschirms
+    obstacle.x = -155; // Zurück zum Startpunkt außerhalb des Bildschirms
   }
 }
 function checkCollisionWithObstacle() {
@@ -372,12 +465,12 @@ function checkCollisionWithObstacle() {
 
 // Hindernis 2 (Ufo)
 const secondObstacleImage = new Image();
-secondObstacleImage.src = '../GoodleJump/ufoCut.png'; // Pfad zum zweiten Hindernisbild
+secondObstacleImage.src = '../GoodleJump/public/ufoCut.png'; // Pfad zum zweiten Hindernisbild
 let secondObstacle = {
-  x: -135, // Start außerhalb des Bildschirms
+  x: -185, // Start außerhalb des Bildschirms
   y: 0,
-  width: 135,
-  height: 85,
+  width: 185,
+  height: 115,
   dx: 0 // Anfangsgeschwindigkeit
 };
 // Funktionen für Hindernis 2
@@ -391,7 +484,7 @@ function updateSecondObstacle() {
   secondObstacle.x += secondObstacle.dx;
   if (secondObstacle.x + secondObstacle.width < 0) {
     secondObstacle.dx = 0;
-    secondObstacle.x = -135;
+    secondObstacle.x = -185;
   }
 }
 function checkCollisionWithSecondObstacle() {
@@ -402,6 +495,32 @@ function checkCollisionWithSecondObstacle() {
     gameOver();
   }
 }
+
+
+// Wolke START
+const cloudImage = new Image();
+cloudImage.src = '../GoodleJump/public/wolke.png'; // Pfad zum Cloud-Bild
+let cloud = {
+  x: -280, // Startposition außerhalb des Bildschirms
+  y: 0,
+  width: 280, // Angepasste Größe nach Bedarf
+  height: 220,
+  dx: -4 // Geschwindigkeit
+};
+function updateCloud() {
+  if (gameStarted && (score < 15 || score > 100) && Math.random() < 0.55 && cloud.x < 0) {
+    cloud.x = canvas.width;
+    cloud.y = Math.random() * (canvas.height - cloud.height);
+    cloud.dx = -4;
+  }
+  cloud.x += cloud.dx;
+  // Entfernen, wenn es außerhalb des Bildschirms ist
+  if (cloud.x + cloud.width < 0) {
+    cloud.x = -280;
+  }
+}
+
+// Wolke ENDE
 
 
 // Kollisionserkennung mit Plattformen
@@ -486,8 +605,14 @@ function updatePlatforms() {
     if (Math.random() < 0.03) { // 3% Wahrscheinlichkeit
       placeShieldOnPlatform(newPlatform);
     }
+
+        // Zufällige Chance, ein Schild auf der neuen Plattform zu platzieren
+    if (score >= 50 && Math.random() < 0.02) { // Ab Score 50 & 2% Wahrscheinlichkeit
+      placeTequilaOnPlatform(newPlatform);
+    }
   }
 }
+
 
 
 // GameOver Funktionen
@@ -548,6 +673,10 @@ function gameLoop() {
   updateAndDrawCoins();
   checkCollisionWithCoins();
   // Coin ende
+
+  // Tequila
+  updateAndDrawTequilas();
+  checkCollisionWithTequilas();
   
   // Bewegliche Plattformen erzeugen
   if (score >= 10 && Math.random() < 0.004) { // Ähnliche Rate wie bei den Hindernissen
@@ -559,7 +688,7 @@ function gameLoop() {
     ctx.drawImage(stonePlatformImage, platform.x, platform.y, platform.width, platform.height);
   });
   
-  // Flugzeug
+  // Flugzeug ab (score===25)
   if(score>25){
     // Aktualisieren und Zeichnen des Hindernisses
     updateObstacle();
@@ -578,7 +707,7 @@ function gameLoop() {
   // Nutella ende
 
   // Ufo 
-  if (score>60){
+  if (score>70){
     updateSecondObstacle();
     checkCollisionWithSecondObstacle();
     ctx.drawImage(secondObstacleImage, secondObstacle.x, secondObstacle.y, secondObstacle.width, secondObstacle.height);  
@@ -586,6 +715,15 @@ function gameLoop() {
 
   // Zeichnen des Spielers
   ctx.drawImage(playerImage, player.x, player.y, player.width, player.height);
+
+  // Wolke
+    updateCloud();
+  // Zeichnen des Cloud-Hindernisses mit Opazität
+  if (cloud.x >= -cloud.width && cloud.x <= canvas.width) {
+    ctx.globalAlpha = 0.8; // Setzen der Transparenz
+    ctx.drawImage(cloudImage, cloud.x, cloud.y, cloud.width, cloud.height);
+    ctx.globalAlpha = 1.0; // Zurücksetzen der Transparenz
+  }
 
   // Anzeige des Scores
   ctx.font = '34px Arial'; // Größere Schriftgröße

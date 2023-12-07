@@ -7,16 +7,54 @@
 </head>
 <body>
 
+    <!-- Info-div -->
+    <div id="infoDiv" style="display: none;">
+        <h2>Spielinformationen</h2>
+
+<!-- Beispiel für ein Spielelement -->
+<div class="infoItem">
+    <img src="../GoodleJump/public/coin.png" alt="Coin" class="infoIcon">
+    <p>Erhöht den Score um 1</p>
+</div>
+
+<!-- Info für das Schild -->
+<div class="infoItem">
+    <img src="../GoodleJump/public/shield.png" alt="Shield" class="infoIcon">
+    <p>Verleiht temporären Schutz vor Hindernissen.</p>
+</div>
+    
+<!-- Info für die Nutella -->
+<div class="infoItem">
+    <img src="../GoodleJump/public/nutella.png" alt="Nutella" class="infoIcon">
+    <p>Halbiert die Sprungkraft für kurze Zeit.</p>
+</div>
+
+<!-- Info für den Tequila -->
+<div class="infoItem">
+    <img src="../GoodleJump/public/tequila.png" alt="Tequila" class="infoIcon">
+    <p>Sorgt für Filmrisse</p>
+</div>
+        <button id="closeInfo">
+            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg>
+        </button>
+    </div>
+
+
     <div id="welcomeScreen">
         <h1>Willkommen zu <br> Goodle Jump!</h1>
-        <h2>Bitte wählen Sie einen Charakter</h2>
+        <h2>Bitte wählen Sie einen Charakter:</h2>
         <div id="characterSelection">
-            <img src="../GoodleJump/char2.png" class="characterOption" data-character="../GoodleJump/char2.png">
-            <img src="../GoodleJump/char3.png" class="characterOption" data-character="../GoodleJump/char3.png">
-            <img src="../GoodleJump/char4.png" class="characterOption" data-character="../GoodleJump/char4.png">
+            <!-- <img src="public/CharacterCut.png" class="characterOption" data-character="public/CharacterCut.png"> -->
+            <img src="../GoodleJump/public/char2.png" class="characterOption" data-character="../GoodleJump/public/char2.png">
+            <img src="../GoodleJump/public/char3.png" class="characterOption" data-character="../GoodleJump/public/char3.png">
+            <img src="../GoodleJump/public/char4.png" class="characterOption" data-character="../GoodleJump/public/char4.png">
+
             <!-- Weitere Charaktere hier hinzufügen -->
         </div>
-        
+
+        <button id="infoButton">
+            <svg xmlns="http://www.w3.org/2000/svg" stroke="black" stroke-width="10" fill="white" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM216 336h24V272H216c-13.3 0-24-10.7-24-24s10.7-24 24-24h48c13.3 0 24 10.7 24 24v88h8c13.3 0 24 10.7 24 24s-10.7 24-24 24H216c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-208a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/></svg>
+        </button>
         <button id="startGameButton" style="display: none;">Spiel starten</button>
     </div>
 
@@ -24,8 +62,7 @@
     <button id="back-btn">
         <a href="../../index.html">Go Back</a>
     </button>
-
-
+    
     <button id="startButton" style="display: none;">Press to Jump</button>
 
     <div id="gameOverScreen" style="display: none;">
